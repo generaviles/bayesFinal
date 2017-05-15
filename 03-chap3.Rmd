@@ -1,0 +1,16 @@
+---
+chapter: 3
+knit: "bookdown::render_book"
+---
+
+# Aproximación Frecuentista {#ch:frequentist}
+
+Sección donde explicaremos los análisis frecuentistas que se pueden implementar.
+
+
+## Análisis Paramétricos {#sec:parametric}
+
+¿Cuáles incluiremos?
+
+
+No sugiero que incluyamos los no paramétricos, ya que no los vimos.

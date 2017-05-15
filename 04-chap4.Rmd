@@ -1,0 +1,18 @@
+---
+chapter: 4
+knit: "bookdown::render_book"
+---
+
+# Aproximación Bayesiana {#ch:bayes}
+
+Sección donde explicaremos los análisis frecuentistas que se pueden implementar.
+
+
+## Modelo con *Priors* desconocidos {#sec:parametric}
+
+¿Cuáles incluiremos?
+
+
+No sugiero que incluyamos los no paramétricos, ya que no los vimos.
+
+## Uso de Stan para correr Cadenas de Markov y Método Monte Carlo

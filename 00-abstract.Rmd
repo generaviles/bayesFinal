@@ -1,0 +1,29 @@
+---
+knit: "bookdown::render_book"
+---
+
+# Abstract {-}
+
+Éste trabajo se presenta para cumplir los requisitos parciales de la materia de **Estadística para el Análisis de Datos**. A través de él damos evidencia de las competencias adquiridas durante el semestre para la selección e interpretación de técnicas de análisis de datos. </br>
+El documento se organiza en las siguientes secciones:
+
+  - Descripción del conjunto de datos con el que se trabajará.
+  - Preproceso.
+    - Reporte de calidad de datos.
+  - Análisis con aproximación frecuentista.
+  - Análisis con aproximación bayesiana.
+  - Conclusiones finales.
+  
+
+
+
+
+
+
+
+
+
+<!-- 
+The following line is required to re-set page numbering after preliminary material. Do not remove
+-->
+\clearpage\pagenumbering{arabic}\setcounter{page}{0}
