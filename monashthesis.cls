@@ -13,6 +13,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
+
 \newif\ifsinglesp@
 \newif\ifdoublesp@
 \newif\ifsingleside@
@@ -194,7 +195,7 @@
 \def\@degrees{}
 \def\@submitdate{\ifcase\the\month\or
   Enero\or Febrero\or Marzo\or Abril\or Mayo\or Junio\or
-  Julio\or Agosto\or Septiembre\or Octubra\or Noviembre\or Diciembre\fi
+  Julio\or Agosto\or Septiembre\or Octubre\or Noviembre\or Diciembre\fi
   \space \number\the\year}
 
 \def\titlepage{{\sf
@@ -209,7 +210,7 @@
     \end{center}
     \vfill
     \begin{center}
-        por\\[0.6cm]
+        by\\[0.6cm]
         {\LARGE\@author}\\[0.2cm]
                 {\@degrees}
 
@@ -218,7 +219,7 @@
         \includegraphics[width=3cm]{figures/uabc}
 
         Maestría y Doctorado en Ciencias e Ingeniería\\
-        Facultad de Ingeniería, Arquitectura y Diseño\\Universidad Autónoma de Baja California
+        Facultad de Ingeniería Arquitectura y Diseño\\Universidad Autónoma de Baja California
     \end{center}
         \begin{center}\large
         \@submitdate
@@ -237,10 +238,10 @@
       \section*{#1}
       \addcontentsline{toc}{section}{#1}
       \markboth{#1}{#1}}
-\else
-  \def\prefacesection#1{
+\else%
+  \def\prefacesection#1{%
       \chapter*{#1}
-      \addcontentsline{toc}{capítulo}{#1}
+      \addcontentsline{toc}{chapter}{#1}
       \markboth{#1}{#1}}
 \fi
 

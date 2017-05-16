@@ -12,13 +12,60 @@ library(ggplot2)
 
 # Generalidades sobre el Conjunto de Datos {#ch:intro}
 
-Información sobre las imágenes de las larvas o los datos con los que terminemos trabajando.
-
-## ¿Por qué un Análisis de Datos Aquí?
-
-¿Qué particularidades son necesarias en éste conjunto de datos  que pueden atenderse con un análisis de datos robusto?
+Los datos utilizados para para elaborar éste trabajo final provienen del área de procesamiento de imágenes (PDI), específicamente el proceso de umbralización. A continuación se explica más a fondo éstos conceptos.
 
 
+## Demostración de Relaciones Trigonométricas para Visión Estereoscópica
+
+Una imagen puede ser definida como una función bidimensional, $f(x,y)$, donde $x$ y $y$ son coordenadas espaciales, y la amplitud de $f$ 
+en cualquier par de coordenadas $(x,y)$ es llamada intensidad o nivel de gris en ese punto. Cuando $x,y$ y el valor de amplitud $f$ 
+son todos finitos, cantidades discretas, llamamos a la imagen, imagen digital. El área de procesamiento digital de imágenes 
+refiere a procesar imágenes digitales por medio  de una computadora digital. Nota que una imagen digital esta compuesta por un número 
+finito de elementos, cada uno de ellos tiene una localización en particular y un valor. Estos elementos son referidos como elementos de foto, 
+elementos de imagen, puntos y pixeles. Pixel es el término mas usado para denotar los elementos de una imagen [@gonzalez2004digital].
+
+El valor de umbral es usado para transformar un conjunto de datos que contiene valores que varía en un rango de valores, a un conjunto de datos que 
+contiene solamente dos. Cuando un valor de umbral es aplicado en datos de entrada, los valores de entrada que caen debajo del umbral son reemplazados 
+por uno de los valores de salida y los valores de entrada por encima del umbral son reemplazados por otro valor de salida [@singh2008edge].
+
+Procedimiento para seleccionar un valor de umbral adecuado:
+
+  1. Seleccionar un valor estimado $T$.
+  2. Segmentar esta imagen usando $T$. Esto producirá dos grupos de pixeles: $R_1$ que consiste en todos los pixeles en escala de grises $> T$, y $R_2$ que 
+ consiste en todos los valores de nivel de gris $\leq T$
+  3. Calcular los valores medios de nivel de gris $\mu_1$ y $\mu_2$, para los pixeles en las regiones $R_1$ y $R_2$.
+  4. Calcular un nuevo valor de umbral: 
+    - Establecer $T_{new} = (\mu_1 + \mu_2)/2$
+    - Establecer $T_{old} = 0$
+  5. Mientras $(T_{new} != T_{old})$:
+    - $\mu_1 =$ Media de los valores medios de nivel de gris en los cuales $f(x,y) > T_{new}$
+    - $\mu_2 =$ Media de los valores medios de nivel de gris en los cuales $f(x,y) \leq T_{new}$
+    - Establecer $T_{old} = T_{new}$
+    - Establecer $T_{new} = (\mu_1 + \mu_2)/2$
+
+Fin mientras:
+
+  6. Valor de umbral adecuado: $T = T_{new}$
+  7. Fin. [@singh2008edge]
+
+Martínez et al. 2015, proporciona un banco de 50 imágenes de larvas de peces en movimiento, realizadas en su último experimento, dicho experimento 
+tiene las siguientes características:
+
+  - Luces fluorescentes con alimnetqción de corriente alterna.
+  - Cámara Nikon D5100
+  - Imágenes con características:
+    - 4928 x 3264 pixeles de dimensión.
+    - 1/125 segundos, tiempo de exposición.
+    - ISO 100.
+    - Distancia focal 55 mm.
+    - Lente macro 40 mm 1:2.8 G
+
+Se pasa del dominio RGB a escala de grises cada imagen ($f_{GS}(x,y) = 0.21 R + 0.72 G + 0.07 B$), y se calcula un umbral adecuado en cada una de ellas, 
+usando el procedimiento anterior. Se divide en dos regiones cada imagen usando el valor de umbral encontrado se da valor de 0 a lo que se encuentra 
+debajo de ese valor, y 255 a los valores por encima. Se cuenta la cantidad de pixeles debajo del valor de umbral. Se mide el tiempo en segundos, que se 
+tarda en encontrar dicho valor umbral adecuado, el tiempo de conteo y el tiempo total.
+  
+   
 ## Datos
 
 Descripción de los datos utilizados.
@@ -27,8 +74,4 @@ Descripción de los datos utilizados.
 
 En ésta sección podemos presentar unas imágenes de donde provienen los datos. Abajo dejo un ejemplo de cómo se puede hacer en R y dejarlo referenciado para que LaTex lo reconozca cuando hace el PDF.
 
-*Figure \ref{fig:deaths} shows time plots of the data we just loaded. Notice how figure captions and references work. Chunk names can be used as figure labels with `fig:` prefixed. Never manually type figure numbers, as they can change when you add or delete figures. This way, the figure numbering is always correct.*
 
-```{r deaths, message=FALSE, fig.cap="Quarterly sales, advertising and GDP data."}
-autoplot(sales, facets=TRUE, ylab="", xlab="Year")
-```

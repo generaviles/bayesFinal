@@ -4,6 +4,7 @@ degreetype: 'Estadística para el Análisis de Datos'
 author: 'Doreen Méndez, Ricardo González, Gener Avilés'
 degrees: ''
 output: bookdown::pdf_book
+bibliography: [thesisrefs.bib]
 site: bookdown::bookdown_site
 link-citations: yes
 knit: "bookdown::render_book"

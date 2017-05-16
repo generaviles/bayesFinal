@@ -5,14 +5,171 @@ knit: "bookdown::render_book"
 
 # Aproximación Bayesiana {#ch:bayes}
 
-Sección donde explicaremos los análisis frecuentistas que se pueden implementar.
+La aproximación estadística **clásica** presenta desafíos aceptando la idea que cierta información *a priori* sobre la probabilidad de la *verdad* es necesaria. Desde su punto de vista la *verdad* no es estocástica y, por lo tanto trata de definir procedimientos con *buenas* propiedades para cada *Verdad*.
+
+Desde los ojos **bayesianos** ésto es imposible, en lo general, y el "falso ídolo de la objetividad" ha llevado a muchos a malos entendidos.
+
+Los bayesianos consideran a la información previa o *priors* como *grados de convicción* subjetivos. En algunos problemas éstos *priors* son muy importantes, pero van perdiendo su relevancia a medida que la cantidad de datos aumenta.[@chapman2014]
+
+## Generalidades de la Aproximación Bayesiana
+De acuerdo a [@chapman2014] al hacer análisis de datos desde la perspectiva bayesiana, uno siempre debe tener en cuenta las 3 fases clave del proceso:
+
+  1. Generar un modelo de probabilidad completo.
+  2. Condicionar en función a los datos observados.
+    - Generación de una distribución posterior dados los "datos observados" que se alimentan al modelo.
+    - Ésta será una distribución de probabilidad condicional de datos no observados, dado los datos observados.
+  3. Evaluar el ajuste del modelo y las implicaciones de la distribución posterior que resulte.
+
+La idea central de la inferencia bayesiana es la **cuantificación de la incertidumbre**.
+
+## Notación General para Inferencia Estadística
+
+Es importante recordar que se conoce como **inferencia estadística** al proceso de obtener conclusiones de datos numéricos sobre cantidades que no han sido observadas.
+
+  - **Parámetro**: Por lo general representado con letras griegas, indica información proveniente de la población.
+    - Usualmente se utiliza la letra **$\theta$** (*theta*) para indicar parámetros no observados de la población.
+  - **Data**: Se refiere a los datos observados.
+    - Se representan con **$y$**.
+  - **Predicciones**: Se refiere a cantidades no conocidas pero potencialmente observables.
+    - Se representan con: **$\widetilde{y}$**.
+
+En resumen: </br>
+
+  - Letras griegas para ***parámetros***.
+  - Letras romanas minúsculas para ***escalares o vectores*** observadas u observables.
+  - Letras romanas mayúsculas para ***matrices*** observadas u observables.
+
+Las conclusiones sobre el parámetro $\theta$ o los datos no observables $\widetilde{y}$ son ***hechas en términos de probabilidad condicional*** del valor observado $y$:
+
+$$p(\theta|y)$$
+$$p(\widetilde{y}|y)$$
+</br>
+
+Todo ésto con la condición implícita en los valores conocidos de las **covariables** $X$, también conocidas como variables *predictoras* o *explicativas*.
 
 
-## Modelo con *Priors* desconocidos {#sec:parametric}
+## Notación en Probabilidad Bayesiana
 
-¿Cuáles incluiremos?
+Densidad de probabilidad condicional con los argumentos determinados en la fórmula:
+
+$$p(\cdot|\cdot)$$
+
+Distribución marginal:
+
+$$p(\cdot)$$
+
+Los términos ***distribución*** y ***densidad*** pueden ser utilizados de forma intercambiable en la literatura.
+
+Cuando se utiliza una distribución estándar, se usa una notación basada en el nombre de la distribución. Asumiendo que $\theta$ tiene una distribución **normal** con media $\mu$ y varianza $\sigma^2$:
+
+$$\theta \sim N(\theta|\mu, \sigma^2)\space \text{   ó   }\space p(\theta) = N(\mu, \sigma^2)$$
+
+Siendo aún más específicos, la misma idea puede expresarse como:
+$$p(\theta|\mu, \sigma^2) = N(\theta|\mu, \sigma^2)$$
+
+## La regla de Bayes
+
+Para poder hacer declaraciones sobre la probabilidad de $\theta$ dado $y$, debemos comenzar con un modelo que provea una distribución de probabilidad conjunta para $\theta$ y $y$.
+
+La densidad de ésta probabilidad conjunta puede ser escrita como un producto de dos densidades que, usualmente, son referidas como la distribución *a priori* $p(\theta)$ y la distribución de muestreo $p(y|\theta)$, respectivamente.
+$$p(\theta,y)=p(\theta)p(y|\theta)$$
+
+##Inferencia Bayesiana
+Teorema de Bayes:
+$$p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{p(y)}$$
+Donde:
+$$p(\theta \mid y) = \text{Posteriori}$$
+$$p(\theta) = \text{Marginal o a Priroi.}$$
+$$p(y \mid \theta) = \text{Máxima Verosimilitud}$$
+$$p(y) = \text{Probabilidad de los datos observados.}$$
+
+Según el caso:
+
+\begin{center}
+Para datos discretos
+\end{center}
+
+$$p(y) = \sum_{\theta} p(y \mid \theta) p(\theta)$$
+
+\begin{center}
+Para datos continuos
+\end{center}
+
+$$p(y) = \int p(y \mid \theta) p(\theta) d \theta$$
 
 
-No sugiero que incluyamos los no paramétricos, ya que no los vimos.
+
+
+Al ser continuo se obvia y nos lleva a:
+
+$$p(\theta \mid y) \propto p(y \mid \theta) p(\theta)$$
+
+## Ejemplo de Aproximación Bayesiana {#sec:examplebayes}
+
+El siguiente ejemplo facilita la comprensión del análisis de datos desde la perspectiva bayesiana, basado en el blog de [Rasmus Bååth.](http://sumsar.net/blog/2017/02/introduction-to-bayesian-data-analysis-part-one/).
+
+Una empresa que comercializa carne de pescado en Suecia es la mayor en su área en éste país, está explorando entrar al mercado Danés. Han decidido entrar al nuevo mercado con un producto en especial: el salmón. El departamento de *marketing* ha realizado ya una propuesta de entrada con un tríptico para vender subsripciones. Ellos ya han piloteado la idea con el mercado danés. Le llamaremos idea **A**.
+
+**A**: Enviar, por correo postal, un tríptio atractivo que invite a la población a adquirir una subscripción anual por salmones.
+
+El departamento de marketing ha enviado 16 correos siguiendo la estrategia **A**, 6 de éstas personas se inscribieron por un año para recibir salmones. Éste departamento quiere saber qué tan bueno es la idea **A**.
+
+### ¿Cuál sería la taza de inscripción al utilizar la estrategia **A** en una mayor población, dados los datos de la oficina de *marketing*? 
+
+  - Para ésta simulación vamos a utilizar 1 000 000 de iteraciones que hará el modelo además de una distirbución previa uniforme.
+
+```{r, echo=TRUE, fig.align='center'}
+set.seed(123)
+# Número de selecciones aleatorias por información a priori
+n_draw <- 100000
+#Realizando n selecciones de la información a priori.
+prior <- runif(n_draw,0,1)
+#Visualización del resultado.
+hist(prior,
+     col = "pink",
+     main = "Histograma de Distribución a Priori para la Estrategia A")
+```
+
+  - Ahora se declarará el modelo y se simularán los datos con los parámetros de la información *a priori* u el modelo.
+  
+```{r, echo=TRUE}
+# Definiendo el modelo generativo.
+generative_model <- function(rate) {
+  subscribers <- rbinom(1, size = 16, prob = rate)
+  subscribers
+}
+
+# Generando datos utilizando el modelo generativo y la información a priori
+subscribers <- rep(NA, n_draw)
+for(i in 1:n_draw) {
+  subscribers[i] <- generative_model(prior[i])
+}
+```
+
+  - El siguiente paso es seleccionar, de los datos resultantes de usar el modelo generativo y la información a priori, aquellos que son iguales a los datos buscados (6 en este caso), realizar entonces un histograma con la información ya filtrada que nos mostrará la **Distribución Posterior**.
+  
+```{r, echo=TRUE, fig.align='center'}
+# Eliminanto todas las cantidades seleccionadas que no sean igual a 6.
+posteriorA <- prior[subscribers == 6] 
+
+#Generando el histograma de la distribución posterior.
+hist(posteriorA,
+     col = "coral2",
+     main = "Histograma de Distribución Posterior",
+     xlim = c(0,1)) 
+length(posteriorA) 
+summary(posteriorA)
+```
+
+Como podemos observar de los cálculos previos, si la estrategia A fuese usada en una población más grande, podemos esperar una taza de subscripción entre el **20%** y **60%**, el resultado muestra un grado de incertidumbre considerable.
+
+Como podemos ver, en la aproximación bayesiana la respuesta no es un número en concreto, mas bien un intervalo de probabilidad además, el mismo análisis nos da más información para contestar otras preguntas que pudieran surgir, nos permite también evaluar la incertidumbre. </br>
+Si el departamento de *marketing* nos dijera que con la estrategia tradicional que han estado usando el último año ellos logran una taza de inscripción del 20% y, ahora con éstos resultados preliminares, quisieran saber cómo se compara la estrategia **A** con su proceso tradicional. La operación sería como se indica:
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+sum(posteriorA > 0.2)/length(posteriorA)
+```
+
+Por lo tanto, podemos decir que, con los datos disponibles la estrategia **A** es **96.5 %** más efectiva que la estrategia tradicional.
 
 ## Uso de Stan para correr Cadenas de Markov y Método Monte Carlo

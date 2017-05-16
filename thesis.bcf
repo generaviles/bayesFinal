@@ -2144,15 +2144,20 @@
     <bcf:datasource type="file" datatype="bibtex">thesisrefs.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">Brown59</bcf:citekey>
-    <bcf:citekey order="2">Brown63</bcf:citekey>
-    <bcf:citekey order="3">Holt57</bcf:citekey>
-    <bcf:citekey order="4">Winters60</bcf:citekey>
-    <bcf:citekey order="5">MH79</bcf:citekey>
-    <bcf:citekey order="6">Metal82</bcf:citekey>
-    <bcf:citekey order="7">CKOS01</bcf:citekey>
-    <bcf:citekey order="8">OKS97</bcf:citekey>
-    <bcf:citekey order="9">HKSG02</bcf:citekey>
+    <bcf:citekey order="1">gonzalez2004digital</bcf:citekey>
+    <bcf:citekey order="2">singh2008edge</bcf:citekey>
+    <bcf:citekey order="3">singh2008edge</bcf:citekey>
+    <bcf:citekey order="4">Brown59</bcf:citekey>
+    <bcf:citekey order="5">Brown63</bcf:citekey>
+    <bcf:citekey order="6">Holt57</bcf:citekey>
+    <bcf:citekey order="7">Winters60</bcf:citekey>
+    <bcf:citekey order="8">MH79</bcf:citekey>
+    <bcf:citekey order="9">Metal82</bcf:citekey>
+    <bcf:citekey order="10">CKOS01</bcf:citekey>
+    <bcf:citekey order="11">OKS97</bcf:citekey>
+    <bcf:citekey order="12">HKSG02</bcf:citekey>
+    <bcf:citekey order="13">chapman2014</bcf:citekey>
+    <bcf:citekey order="14">chapman2014</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nyt/global/" type="entry" sortscheme="nyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
